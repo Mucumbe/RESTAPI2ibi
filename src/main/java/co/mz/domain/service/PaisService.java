@@ -1,6 +1,7 @@
 package co.mz.domain.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import co.mz.domain.Pais;
@@ -35,8 +36,16 @@ public class PaisService {
 		pais.setRegiao(regiao);
 		pais.setSubRegiao(subRegiao);
 		
-		return paisRepository.save(pais);
+		return paisRepository.save(pais);	
+	}
+	
+	public void apagar(long id) {
 		
+		try {
+			paisRepository.deleteById(id);
+		} catch (EmptyResultDataAccessException e) {
+			throw new EntidadeNaoEncontradaException(String.format("Não existe Pais com o codigo %n%d",id));
+		}
 		
 	}
 }
