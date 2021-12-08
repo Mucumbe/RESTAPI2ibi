@@ -24,7 +24,7 @@ public class PaisService {
 	@Autowired
 	private SubRegiaoRepository subRegiaoRepository;
 	
-	public Pais guardar(Pais pais) {
+	public Pais guardar_Actualizar(Pais pais) {
 		long idR= pais.getRegiao().getId();
 		long idSR= pais.getSubRegiao().getId();
 		

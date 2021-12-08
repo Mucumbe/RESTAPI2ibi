@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +27,6 @@ public class PaisController {
 	private PaisRepository repository;
 	@Autowired
 	private PaisService service;
-	
 
 	@GetMapping
 	private List<Pais> listar() {
@@ -42,15 +42,27 @@ public class PaisController {
 		}
 		return ResponseEntity.notFound().build();
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Pais> guardar(@RequestBody Pais pais) {
 		try {
-			pais=service.guardar(pais);
+			pais = service.guardar_Actualizar(pais);
 			return ResponseEntity.status(HttpStatus.CREATED).body(pais);
 		} catch (EntidadeNaoEncontradaException e) {
 			return ResponseEntity.badRequest().build();
 		}
 	}
 	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Pais> apagar(@PathVariable long id) {
+
+		try {
+			service.apagar(id);
+			return ResponseEntity.noContent().build();
+		} catch (EntidadeNaoEncontradaException e) {
+
+			return ResponseEntity.notFound().build();
+		}
+	}
+
 }
