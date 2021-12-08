@@ -22,10 +22,10 @@ public class Pais {
 	private long id;
 	private String nome;
 	private String capital;
-	
+
 	@ManyToOne
 	private Regiao regiao;
-	
+
 	@ManyToOne
 	private SubRegiao subRegiao;
 	private BigDecimal area;
