@@ -26,13 +26,12 @@ public class PaisController {
 	}
 
 	@GetMapping("/{id}")
-	private ResponseEntity<Pais> listarId(@PathVariable long id){
-		
-		Optional<Pais> optional= repository.findById(id);
+	private ResponseEntity<Pais> listarId(@PathVariable long id) {
+
+		Optional<Pais> optional = repository.findById(id);
 		if (optional.isPresent()) {
 			return ResponseEntity.ok(optional.get());
 		}
 		return ResponseEntity.notFound().build();
-		
 	}
 }
