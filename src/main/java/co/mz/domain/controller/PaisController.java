@@ -1,20 +1,26 @@
 package co.mz.domain.controller;
 
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import co.mz.domain.Pais;
 import co.mz.domain.Repository.PaisRepository;
@@ -67,23 +73,34 @@ public class PaisController {
 		}
 	}
 
-	@PutMapping("/{id}")
-	public ResponseEntity<Pais> editar(@PathVariable long id, @RequestBody Pais pais) {
+	@PatchMapping("/{id}")
+	public ResponseEntity<Pais> editar(@PathVariable long id, @RequestBody Map<String, Object> campos) {
 		Optional<Pais> paisActual = repository.findById(id);
 
-		if (paisActual.isPresent()) {
-
-			try {
-				BeanUtils.copyProperties(pais, paisActual.get(), "id");
-				Pais actualizar = service.guardar_Actualizar(paisActual.get());
-
-				return ResponseEntity.ok(actualizar);
-
-			} catch (Exception e) {
-				return ResponseEntity.badRequest().build();
-			}
+		if (paisActual.isEmpty()) {
+			return ResponseEntity.notFound().build();
 		}
-		return ResponseEntity.notFound().build();
+		merge(campos, paisActual.get());
+		
+		Pais paisActualizado=service.guardar_Actualizar(paisActual.get());
+		
+		return ResponseEntity.ok(paisActualizado);
+	}
+
+	public void merge(Map<String, Object> campoOrigem, Pais paisDestiono) {
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		Pais paisOrigem = objectMapper.convertValue(campoOrigem, Pais.class);
+
+		campoOrigem.forEach((nome, propiedade) -> {
+			Field field = ReflectionUtils.findField(Pais.class, nome);
+			field.setAccessible(true);
+
+			Object novoValor = ReflectionUtils.getField(field, paisOrigem);
+
+			ReflectionUtils.setField(field, paisDestiono, novoValor);
+
+		});
 	}
 
 }
