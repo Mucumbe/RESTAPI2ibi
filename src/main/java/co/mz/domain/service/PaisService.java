@@ -27,15 +27,15 @@ public class PaisService {
 	public Pais guardar_Actualizar(Pais pais) {
 		long idR= pais.getRegiao().getId();
 		long idSR= pais.getSubRegiao().getId();
-		
+		System.err.println("servico");
 		Regiao regiao= regiaoRepository.findById(idR)
 				.orElseThrow(()-> new EntidadeNaoEncontradaException(String.format("Não existe Regiao com o codigo: %d%n",idR)));
 		SubRegiao subRegiao= subRegiaoRepository.findById(idSR)
 				.orElseThrow(()-> new EntidadeNaoEncontradaException(String.format("Não existe Sub-Regiao com o codigo %n%d",idSR)));
-		
+		System.err.println("servico");
 		pais.setRegiao(regiao);
 		pais.setSubRegiao(subRegiao);
-		
+		System.err.println("servico");
 		return paisRepository.save(pais);	
 	}
 	
