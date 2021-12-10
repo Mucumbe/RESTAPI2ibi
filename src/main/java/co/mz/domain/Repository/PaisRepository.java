@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import co.mz.domain.Pais;
 
 @Repository
-public interface PaisRepository extends JpaRepository<Pais, Long> {
+public interface PaisRepository extends JpaRepository<Pais, Long>,PaisRepositoryQueres {
 
 }
