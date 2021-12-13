@@ -40,6 +40,12 @@ public class PaisController {
 	private List<Pais> listar() {
 		return repository.findAll();
 	}
+	
+	@GetMapping("/listaDinamica")
+	public List<Pais> listarOrdenada(String nome,String capital,String regiao,String Subregioao){
+		
+		return repository.find(nome, capital, regiao, Subregioao);
+	}
 
 	@GetMapping("/{id}")
 	public ResponseEntity<Pais> listarId(@PathVariable long id) {
