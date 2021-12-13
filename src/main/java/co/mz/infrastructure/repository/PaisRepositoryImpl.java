@@ -33,8 +33,6 @@ public class PaisRepositoryImpl implements PaisRepositoryQueres {
 	@Override
 	public List<Pais> find(String nome,String capital,String regiao,String subRegiao){
 		
-		Optional<Regiao> regiaotest=regiaoRepository.findById(Long.valueOf(regiao));
-		
 		CriteriaBuilder builder= manager.getCriteriaBuilder();
 		CriteriaQuery<Pais> criteria=builder.createQuery(Pais.class);
 		Root<Pais> root=criteria.from(Pais.class);

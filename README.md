@@ -1,0 +1,151 @@
+# API RESTful-Propiedades Paises
+[![NPM](https://img.shields.io/npm/l/react)]
+
+# Sobre o projeto
+
+
+API RESTful-Propiedades Paises é uma aplicação BackEnd  construída para a candidatora para vaga de Back-End Engineer capas de executar as actividades listas abacho.
+- criar um novo país a partir da API criada com todas as suas propriedades;
+- listar todos os países anteriormente criados;
+- modificar os dados de um país anteriormente criado;
+- eliminar um país anteriormente criado;
+- ordenar a lista dos países por qualquer uma das suas propriedades.
+
+## A aplicação consiste em disponibilizar  Endpoits de com as funcionalidades listadas acima
+Exemplos:
+### pedido HTTP correspondente à listagem de todos paises:
+	GET /paises HTTP/1.1
+	Accept: application/json
+	Resposta a este pedido
+	
+	HTTP/1.1 200 OK
+	Content-Type: application/json
+	(...)
+	[
+    {
+        "id": 1,
+        "nome": "Moçambique",
+        "capital": "Maputo",
+        "regiao": {
+            "id": 2,
+            "nome": "Sul"
+        },
+        "subRegiao": {
+            "id": 1,
+            "nome": "SubRegiao1"
+        },
+        "area": 801590.00
+    },
+    {
+    	(...)
+    }
+]
+
+### pedido HTTP correspondente à Criação de um pais na Base de dados:
+	Post /paises HTTP/1.1
+	Accept: application/json
+	{
+    "nome": "Moçambique",
+    "capital": "Maputo",
+    "regiao": {
+        "id": 1
+    },
+    "subRegiao": {
+        "id": 1
+    },
+    "area": 801590.00
+}
+	
+	Resposta a este pedido
+	HTTP/1.1 201 CREATED
+	Content-Type: application/json
+		{
+	    "id": 7,
+	    "nome": "Moçambique",
+	    "capital": "Maputo",
+	    "regiao": {
+	        "id": 1,
+	        "nome": "Norte"
+	    },
+	    "subRegiao": {
+	        "id": 1,
+	        "nome": "SubRegiao1"
+	    },
+	    "area": 801590.00
+	}
+	
+### pedido HTTP Retorna dados de um pais por ID correspondente:
+	GET /paises/1 HTTP/1.1
+	Accept: application/json
+	
+	Resposta a este pedido
+	HTTP/1.1 200 OK
+	Content-Type: application/json
+		{
+    "id": 1,
+    "nome": "Moçambique",
+    "capital": "Maputo",
+    "regiao": {
+        (.....)
+    },
+    "subRegiao": {
+        (....)
+    },
+    "area": 801590.00
+}
+
+### pedido HTTP correspondente à eliminacao de pais por ID:
+	DELETE /paises/2 HTTP/1.1
+	Accept: application/json
+	
+	Resposta a este pedido
+	HTTP/1.1 204 No Content
+	Content-Type: application/json
+	
+### pedido HTTP correspondente à edicao de pais por ID(So actualiza as variaveis colocadas no Endpoit):
+	DELETE /paises/2 HTTP/1.1
+	Accept: application/json
+	{
+    "capital": "Moeda"
+    
+	}
+	
+	Resposta a este pedido
+	HTTP/1.1 200 Ok
+	Content-Type: application/json
+	{
+    "id": 1,
+    "nome": "Moçambique",
+    "capital": "Moeda",
+    "regiao": {
+        (...)
+    },
+    "subRegiao": {
+        (...)
+    },
+    "area": 801590.00
+}
+
+# Tecnologias utilizadas
+## Back end
+- Java
+- Spring Boot
+- JPA / Hibernate
+- lombok
+
+## Implantação em produção
+- Back end: Heroku
+- Banco de dados: mysql
+
+# Como executar o projeto
+
+## Backend
+- Pré-requisitos: Java 11
+
+
+# Autor
+
+Blandino Júnior Sibone Mucumbe
+
+
+
