@@ -26,6 +26,11 @@ import co.mz.domain.Repository.PaisRepository;
 import co.mz.domain.exception.EntidadeNaoEncontradaException;
 import co.mz.domain.service.PaisService;
 
+
+/**
+ * @author Blandino Junior Sibone Mucumbe
+ *
+ */
 @RestController
 @RequestMapping("/paises")
 public class PaisController {
@@ -35,17 +40,19 @@ public class PaisController {
 	@Autowired
 	private PaisService service;
 
+	/* metodo reponsalve por listar paises */
 	@GetMapping
 	private List<Pais> listar() {
 		return repository.findAll();
 	}
-	
+	/*Metodo responsavel por listar paises com combinação de varios atributos */
 	@GetMapping("/listaDinamica")
 	public List<Pais> listarOrdenada(String nome,String capital,String regiao,String Subregioao){
 		
 		return repository.find(nome, capital, regiao, Subregioao);
 	}
 
+	/* metodo reponsalve por retornar um pais corepondente a um ID*/
 	@GetMapping("/{id}")
 	public ResponseEntity<Pais> listarId(@PathVariable long id) {
 
@@ -56,6 +63,7 @@ public class PaisController {
 		return ResponseEntity.notFound().build();
 	}
 
+	/* metodo reponsalvel por registrar propiedades de um novo pais*/
 	@PostMapping
 	public ResponseEntity<Pais> guardar(@RequestBody Pais pais) {
 		try {
@@ -66,6 +74,9 @@ public class PaisController {
 		}
 	}
 
+	/*
+	 * Metodo responsalvel por apagar propiedades de um pais corespondente a um id
+	 */
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Pais> apagar(@PathVariable long id) {
 
@@ -78,6 +89,9 @@ public class PaisController {
 		}
 	}
 
+	/*
+	 * Metodo responsavel por editar atributos de um pais 'So actualiza os atributos colocados nos endpoit
+	 */
 	@PatchMapping("/{id}")
 	public ResponseEntity<Pais> editar(@PathVariable long id, @RequestBody Map<String, Object> campos) {
 		Optional<Pais> paisActual = repository.findById(id);
@@ -92,6 +106,9 @@ public class PaisController {
 		return ResponseEntity.ok(paisActualizado);
 	}
 
+	/*
+	 * Metodo responsavel por auxiliar o metodo editar para editar os atributos de forma parcial ou completa
+	 */
 	public void merge(Map<String, Object> campoOrigem, Pais paisDestiono) {
 
 		ObjectMapper objectMapper = new ObjectMapper();

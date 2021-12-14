@@ -6,15 +6,15 @@
 
 API RESTful-Propiedades Paises é uma aplicação BackEnd  construída para a candidatora para vaga de Back-End Engineer capas de executar as actividades listas abacho.
 - criar um novo país a partir da API criada com todas as suas propriedades;
-- listar todos os países anteriormente criados;
+- listar todos os países anteriorimente criados;
 - modificar os dados de um país anteriormente criado;
 - eliminar um país anteriormente criado;
 - ordenar a lista dos países por qualquer uma das suas propriedades.
 
-## A aplicação consiste em disponibilizar  Endpoits de com as funcionalidades listadas acima
+## A aplicação consiste em disponibilizar  Endpoits com as funcionalidades listadas acima
 Exemplos:
 ### pedido HTTP correspondente à listagem de todos paises:
-	GET /paises HTTP/1.1
+	GET https://apipais.herokuapp.com/paises HTTP/1.1
 	Accept: application/json
 	Resposta a este pedido
 	
@@ -42,7 +42,7 @@ Exemplos:
 ]
 
 ### pedido HTTP correspondente à Criação de um pais na Base de dados:
-	Post /paises HTTP/1.1
+	Post https://apipais.herokuapp.com/paises HTTP/1.1
 	Accept: application/json
 	{
     "nome": "Moçambique",
@@ -75,7 +75,7 @@ Exemplos:
 	}
 	
 ### pedido HTTP Retorna dados de um pais por ID correspondente:
-	GET /paises/1 HTTP/1.1
+	GET https://apipais.herokuapp.com/paises/1 HTTP/1.1
 	Accept: application/json
 	
 	Resposta a este pedido
@@ -95,7 +95,7 @@ Exemplos:
 }
 
 ### pedido HTTP correspondente à eliminacao de pais por ID:
-	DELETE /paises/2 HTTP/1.1
+	DELETE https://apipais.herokuapp.com/paises/2 HTTP/1.1
 	Accept: application/json
 	
 	Resposta a este pedido
@@ -133,6 +133,10 @@ Exemplos:
 - JPA / Hibernate
 - lombok
 
+## Base de dados
+-Mysql - Local
+-PostgreSQL - local(heroku) hospedado
+
 ## Implantação em produção
 - Back end: Heroku
 - Banco de dados: mysql
@@ -140,7 +144,7 @@ Exemplos:
 # Como executar o projeto
 
 ## Backend
-- Pré-requisitos: Java 11
+- Pré-requisitos: Java 8
 
 
 # Autor

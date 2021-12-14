@@ -3,7 +3,7 @@ package co.mz.domain.exception;
 public class EntidadeNaoEncontradaException extends RuntimeException {
 
 	/**
-	 * 
+	 * @author Blandino Junior Sibone Mucumbe
 	 */
 	private static final long serialVersionUID = 1L;
 

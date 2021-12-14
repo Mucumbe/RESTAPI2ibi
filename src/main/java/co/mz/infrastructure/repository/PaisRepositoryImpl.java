@@ -2,7 +2,7 @@ package co.mz.infrastructure.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -17,10 +17,12 @@ import org.springframework.stereotype.Repository;
 import org.springframework.util.StringUtils;
 
 import co.mz.domain.Pais;
-import co.mz.domain.Regiao;
 import co.mz.domain.Repository.PaisRepositoryQueres;
 import co.mz.domain.Repository.RegiaoRepository;
 
+/**
+ * @author Blandino Junior Sibone Mucumbe
+ * */
 @Repository
 public class PaisRepositoryImpl implements PaisRepositoryQueres {
 
@@ -30,6 +32,9 @@ public class PaisRepositoryImpl implements PaisRepositoryQueres {
 	@Autowired
 	RegiaoRepository regiaoRepository;
 	
+	/*
+	 * Metodo que implementa listagem de paises Por combinação de varios criterios
+	 * */
 	@Override
 	public List<Pais> find(String nome,String capital,String regiao,String subRegiao){
 		
@@ -48,10 +53,6 @@ public class PaisRepositoryImpl implements PaisRepositoryQueres {
 		if (regiao!=null) {
 			predicates.add(builder.equal(root.get("regiao"),regiao));
 		}
-		
-		//if (StringUtils.hasLength(regiao)) {
-		//	predicates.add(builder.equal(root.get("sub_regiao_id"),subRegiao));
-	//	}
 		
 		criteria.where(predicates.toArray( new Predicate[0]));
 		TypedQuery<Pais> query=manager.createQuery(criteria);

@@ -12,6 +12,9 @@ import co.mz.domain.Repository.RegiaoRepository;
 import co.mz.domain.Repository.SubRegiaoRepository;
 import co.mz.domain.exception.EntidadeNaoEncontradaException;
 
+/**
+ * @author Blandino Junior Sibone Mucumbe
+ * */
 @Service
 public class PaisService {
 
@@ -24,21 +27,27 @@ public class PaisService {
 	@Autowired
 	private SubRegiaoRepository subRegiaoRepository;
 	
+	/*
+	 * Metodo Responsavel por Guardar e actualizar Propiedades de pais
+	 * Valida a Existencia de regiao ou Subregiao
+	 * */
 	public Pais guardar_Actualizar(Pais pais) {
 		long idR= pais.getRegiao().getId();
 		long idSR= pais.getSubRegiao().getId();
-		System.err.println("servico");
 		Regiao regiao= regiaoRepository.findById(idR)
 				.orElseThrow(()-> new EntidadeNaoEncontradaException(String.format("Não existe Regiao com o codigo: %d%n",idR)));
 		SubRegiao subRegiao= subRegiaoRepository.findById(idSR)
 				.orElseThrow(()-> new EntidadeNaoEncontradaException(String.format("Não existe Sub-Regiao com o codigo %n%d",idSR)));
-		System.err.println("servico");
 		pais.setRegiao(regiao);
 		pais.setSubRegiao(subRegiao);
 		System.err.println("servico");
 		return paisRepository.save(pais);	
 	}
 	
+	/*
+	 * Metodo Responsavel por apagar eum pais corespondente a um ID
+	 * Valida se a regiao que se pretende apagar Existe ou não
+	 * */
 	public void apagar(long id) {
 		
 		try {
