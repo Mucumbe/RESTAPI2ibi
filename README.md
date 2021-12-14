@@ -4,7 +4,7 @@
 # Sobre o projeto
 
 
-API RESTful-Propiedades Paises é uma aplicação BackEnd  construída para a candidatora para vaga de Back-End Engineer capas de executar as actividades listas abacho.
+API RESTful-Propiedades Paises é uma aplicação BackEnd  construída para a candidatora para vaga de Back-End Engineer capaz de executar as actividades listadas abacho.
 - criar um novo país a partir da API criada com todas as suas propriedades;
 - listar todos os países anteriorimente criados;
 - modificar os dados de um país anteriormente criado;
